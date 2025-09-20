@@ -1,8 +1,20 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, flash
+
 app = Flask(__name__)
-@app.route('/')
-def home():
-    return render_template('home.html')
-@app.route('/about')
-def about():
-    return render_template('about.html')
+app.secret_key = 'my-secret-key'
+
+@app.route('/', methods=['GET', 'POST']) 
+def form():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        
+        if not name:
+            flash('Name is required!')
+            return redirect(url_for('form'))
+        flash(f'Thanks {name}, your feedback was saved!')
+        return redirect(url_for('thankyou'))
+    return render_template('form.html')
+
+@app.route('/thankyou')
+def thankyou():
+    return render_template('thankyou.html')   

@@ -1,38 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %} My Website {% endblock %}</title>
-    <style>
-        body{
-            font-family: Arial, Helvetica, sans-serif;
-            padding: 28px;
-        }
-        header{
-            background: #333;
-            color: white;
-            padding: 10px;
-        }
-        footer{
-            background: yellow;
-            padding: 10px;
-            margin-top: 20px;
-        }
-    </style>
+    <title>My Site</title>
 </head>
 <body>
-  
-<header>
-    <h2>My Site</h2>
-    <nav>
-        <a href="/">Home</a> |
-        <a href="/about">About</a>
-    </nav>
-</header>
-{% block content %}
-{% endblock %}
-
-<footer>
-    <p>@2025 INDIAS BST CODING PLATFORM.</p>
-</footer>
+    <header>
+        <h1>Welcome to my site.</h1>
+        <nav>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul style = "color: green;">
+            {% for msg in messages %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
 </body>
 </html>
