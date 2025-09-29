@@ -1,24 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>My Site</title>
+    <title>{% block title %}Flask_wtf{% endblock %}</title>
 </head>
 <body>
-    <header>
-        <h1>Welcome to my site.</h1>
-        <nav>
-            <a href="/">Home</a>
-        </nav>
-    </header>
-    {% with messages = get_flashed_messages() %}
+    <h1>Flask_wtf Registration.</h1>
+    
+    {% with messages = get_flashed_messages(with_categories=True) %}
         {% if messages %}
-            <ul style = "color: green;">
-            {% for msg in messages %}
-                <li>{{ msg }}</li>
+            {% for category, msg in messages %}
+                <p style="color: green;">{{ msg }}</p>
             {% endfor %}
-            </ul>
         {% endif %}
     {% endwith %}
+    
     {% block content %}{% endblock %}
 </body>
 </html>
